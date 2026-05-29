@@ -141,8 +141,8 @@ Because apparently sleeping is optional in tech now.
 # 📫 Contact
 
 - 📧 Email: malikthompson566@gmail.com
-- 🌐 Portfolio: Add your portfolio link here
-- 💼 LinkedIn: Add LinkedIn link here
+- 🌐 Portfolio: https://thomps.netlify.app/
+- 💼 LinkedIn: https://www.linkedin.com/in/thompson-malik-212480411
 
 ---
 
