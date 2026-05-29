@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thompson Malik — Software Engineer & AI Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0D1B2A;
+    --navy2:   #162234;
+    --slate:   #1E3148;
+    --steel:   #2C4A6E;
+    --accent:  #4A90D9;
+    --accent2: #6BAED6;
+    --gold:    #C8A96E;
+    --gold2:   #E8C98A;
+    --muted:   #8BA5C0;
+    --light:   #D0DDE8;
+    --white:   #F4F8FC;
+    --serif:   'DM Serif Display', Georgia, serif;
+    --sans:    'DM Sans', system-ui, sans-serif;
+    --mono:    'JetBrains Mono', monospace;
+    --radius:  12px;
+    --radius-lg: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--navy);
+    color: var(--light);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(13, 27, 42, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(74, 144, 217, 0.12);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    max-width: 1100px; margin: 0 auto; width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-name em { color: var(--accent2); font-style: normal; }
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    color: var(--gold2);
+    letter-spacing: 0.06em;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.3s forwards;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--light);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(208, 221, 232, 0.25);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  /* Hero visual panel */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; animation: fadeIn 0.8s 0.5s forwards;
+  }
+  .profile-card {
+    background: var(--navy2);
+    border: 1px solid rgba(74, 144, 217, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    width: 100%; max-width: 380px;
+  }
+  .profile-initials {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--steel), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 1.4rem;
+  }
+  .profile-card h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .profile-card .role-tag {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.6rem;
+  }
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-top: 1.4rem;
+    border-top: 1px solid rgba(74, 144, 217, 0.12);
+    padding-top: 1.4rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--accent2);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .availability-dot {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: #5cb85c; margin-top: 1.2rem;
+    padding: 0.4rem 0.9rem;
+    background: rgba(92, 184, 92, 0.08);
+    border: 1px solid rgba(92, 184, 92, 0.2);
+    border-radius: 100px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%; background: #5cb85c;
+    animation: pulse 2s infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 4rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 540px;
+    margin-bottom: 3.5rem;
+    line-height: 1.8;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(74,144,217,0.3), transparent);
+    margin: 0 4rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+  .about-body { font-size: 1rem; color: var(--muted); font-weight: 300; line-height: 1.9; }
+  .about-body p { margin-bottom: 1.2rem; }
+  .about-body strong { color: var(--light); font-weight: 500; }
+  .info-stack { display: flex; flex-direction: column; gap: 1rem; }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--navy);
+    border: 1px solid rgba(74,144,217,0.1);
+    border-radius: var(--radius);
+  }
+  .info-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(74,144,217,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .info-content {}
+  .info-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--mono); }
+  .info-value { font-size: 0.9rem; color: var(--light); font-weight: 500; margin-top: 0.15rem; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--navy2);
+    border: 1px solid rgba(74,144,217,0.12);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(74,144,217,0.35); transform: translateY(-4px); }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .skill-name { font-weight: 600; color: var(--white); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    background: rgba(74,144,217,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(74,144,217,0.2);
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--navy2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .project-card {
+    background: var(--navy);
+    border: 1px solid rgba(74,144,217,0.12);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: rgba(74,144,217,0.3); transform: translateY(-5px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-number {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.75;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .project-impact {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--gold);
+    padding: 0.5rem 0.8rem;
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.15);
+    border-radius: var(--radius);
+    line-height: 1.5;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--navy); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(74,144,217,0.08);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .tl-meta { }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-company { font-size: 0.85rem; color: var(--gold); font-weight: 500; }
+  .tl-loc { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; font-weight: 300; }
+  .tl-content {}
+  .tl-role {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+  }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .tl-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .tl-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--navy2); }
+  .edu-card {
+    background: var(--navy);
+    border: 1px solid rgba(74,144,217,0.15);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+  }
+  .edu-badge {
+    width: 56px; height: 56px; flex-shrink: 0;
+    border-radius: var(--radius);
+    background: rgba(74,144,217,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .edu-body {}
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+  .edu-school { font-size: 0.9rem; color: var(--accent2); font-weight: 500; margin-bottom: 0.5rem; }
+  .edu-meta { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
+  .course-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .course-tag {
+    font-size: 0.75rem;
+    background: rgba(74,144,217,0.08);
+    color: var(--muted);
+    border: 1px solid rgba(74,144,217,0.12);
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--navy); }
+  .contact-box {
+    background: var(--navy2);
+    border: 1px solid rgba(74,144,217,0.18);
+    border-radius: var(--radius-lg);
+    padding: 4rem;
+    text-align: center;
+    max-width: 700px; margin: 0 auto;
+  }
+  .contact-box h2 {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .contact-box p { color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; line-height: 1.8; }
+  .contact-email {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin-bottom: 2.5rem;
+    display: block;
+  }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(74,144,217,0.1);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 0.8rem;
+  }
+  footer .foot-name { font-family: var(--serif); color: var(--light); }
+
+  /* ── BG DECORATION ── */
+  .bg-orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(100px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(44,74,110,0.35); top: -100px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(200,169,110,0.06); bottom: 10%; left: -80px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 2rem; }
+    .hero-grid, .about-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .contact-box { padding: 2.5rem 1.5rem; }
+    .divider { margin: 0 2rem; }
+    #hero { padding: 7rem 2rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Thompson <span>Malik</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">Software Engineer &amp; AI Data Specialist</p>
+      <h1 class="hero-name">Thompson<br><em>Malik</em></h1>
+      <p class="hero-title">B.Sc. Computer Science — CSULB &nbsp;|&nbsp; Python &nbsp;·&nbsp; AI/ML &nbsp;·&nbsp; Web Development</p>
+      <p class="hero-desc">
+        I build AI-integrated tools and automation systems that solve real problems.
+        With a CS foundation and hands-on experience in AI model evaluation, I sit at the
+        intersection of engineering and machine learning — a perspective most engineers
+        only develop after a decade on the job.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="profile-card">
+        <div class="profile-initials">TM</div>
+        <h3>Thompson Malik</h3>
+        <p class="role-tag">SOFTWARE ENGINEER &amp; AI SPECIALIST</p>
+        <p style="font-size:0.85rem; color:var(--muted); font-weight:300; line-height:1.7;">
+          CS graduate with real-world experience evaluating AI systems, building automation tools, and shipping Python-based solutions across diverse problem domains.
+        </p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Projects Shipped</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2021</div>
+            <div class="stat-label">CS Graduate</div>
+          </div>
+        </div>
+        <div class="availability-dot">
+          <div class="dot"></div>
+          Open to opportunities
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          I'm a Computer Science graduate from California State University, Long Beach, with a genuine curiosity for how systems are designed — not just how to build them, but <strong>why they're bu[...]
+        </p>
+        <p>
+          After graduating, I spent nearly a year in AI data operations at Alignerr, evaluating large language model outputs at scale. That role gave me an uncommon perspective: I understand not just [...]
+        </p>
+        <p>
+          In my own time, I read engineering post-mortems from Cloudflare, Stripe, and Netflix. I tend to <strong>over-document everything</strong> — my personal projects have READMEs that are proba[...]
+        </p>
+        <p>
+          Outside of code, I run distance — which I mention because it reflects how I work: comfortable with long unglamorous stretches of effort, no external pressure required.
+        </p>
+      </div>
+      <div class="info-stack">
+        <div class="info-row">
+          <div class="info-icon">🎓</div>
+          <div class="info-content">
+            <div class="info-label">Education</div>
+            <div class="info-value">B.Sc. Computer Science — CSULB, 2021</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <div class="info-label">Location</div>
+            <div class="info-value">California, USA</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div class="info-content">
+            <div class="info-label">Email</div>
+            <div class="info-value">malikthompson566@gmail.com</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🌐</div>
+          <div class="info-content">
+            <div class="info-label">Languages</div>
+            <div class="info-value">English (Native) &nbsp;·&nbsp; Kiswahili (Native)</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🎯</div>
+          <div class="info-content">
+            <div class="info-label">Focus Areas</div>
+            <div class="info-value">AI Tools · Automation · Web Development</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <p class="section-sub">A practical stack built through coursework, personal projects, and hands-on AI data work.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python Development</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Scripting, automation, data processing, and ML tooling with Python as primary language.</p>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Jupyter</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI &amp; Machine Learning</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Model evaluation, prompt engineering, LLM output quality assessment, and data pipeline work.</p>
+        <div class="skill-tags">
+          <span class="tag">LLM Eval</span>
+          <span class="tag">Prompt Eng.</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Data Annotation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">Web Development</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Building functional, user-facing web applications and automation-backed interfaces.</p>
+        <div class="skill-tags">
+          <span class="tag">HTML &amp; CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">React basics</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">Automation &amp; Data</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Building tools that eliminate repetitive tasks and clean, structure, and process data at scale.</p>
+        <div class="skill-tags">
+          <span class="tag">Scripting</span>
+          <span class="tag">CSV Pipelines</span>
+          <span class="tag">Google Sheets</span>
+          <span class="tag">Airtable</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-name">Dev Tools &amp; Workflow</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Version control, documentation, and collaborative async development practices.</p>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Notion</span>
+          <span class="tag">Slack</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <div class="skill-name">CS Fundamentals</div>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300; margin-bottom:0.8rem;">Strong academic grounding in algorithms, data structures, and system design.</p>
+        <div class="skill-tags">
+          <span class="tag">Algorithms</span>
+          <span class="tag">Data Structures</span>
+          <span class="tag">System Design</span>
+          <span class="tag">Databases</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Practical tools built to solve real problems — each one a deliberate exercise in shipping something useful.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-number">01 / AI-POWERED APP</div>
+        <h3 class="project-title">SkinSync AI</h3>
+        <p class="project-desc">
+          An AI-powered skincare analyzer that processes user selfies to assess skin condition and generate personalized skincare routines, treatment recommendations, and curated product suggestions …
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">AI/LLM</span>
+          <span class="tag">API Integration</span>
+        </div>
+        <div class="project-impact">
+          💡 Combines image analysis with personalized AI output — demonstrates end-to-end product thinking from input to actionable recommendation.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">02 / PRODUCTIVITY TOOL</div>
+        <h3 class="project-title">King V Assistant</h3>
+        <p class="project-desc">
+          A productivity and habit-tracking assistant that helps users maintain focus through intelligent reminders, progress tracking, and workflow automation. Designed around behavioral consistency …
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">Automation</span>
+          <span class="tag">Scheduling</span>
+          <span class="tag">UX Logic</span>
+        </div>
+        <div class="project-impact">
+          💡 Addresses the gap between intention and follow-through — a productivity tool with behavioral design baked in, not bolted on.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">03 / COMMUNITY PLATFORM</div>
+        <h3 class="project-title">Church Community Game</h3>
+        <p class="project-desc">
+          An interactive WhatsApp-based community engagement platform featuring Bible quizzes, structured debate prompts, streak systems for consistent participation, and personalized motivational con…
+        </p>
+        <div class="project-stack">
+          <span class="tag">WhatsApp API</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Automation</span>
+          <span class="tag">Content Logic</span>
+        </div>
+        <div class="project-impact">
+          💡 Demonstrates platform thinking — building engagement mechanics and streak systems within messaging infrastructure constraints.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">04 / DATA TOOLING</div>
+        <h3 class="project-title">LLM Response Quality Analyzer</h3>
+        <p class="project-desc">
+          A Python utility that batch-processes AI-generated text responses, scoring each against reference outputs using cosine similarity. Flags responses below a defined coherence threshold and gen…
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Data Pipeline</span>
+        </div>
+        <div class="project-impact">
+          💡 Born directly from Alignerr work — translating manual evaluation experience into an automated tooling solution.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">05 / ALGORITHM RESEARCH</div>
+        <h3 class="project-title">Algorithm Benchmarking Suite</h3>
+        <p class="project-desc">
+          A capstone Python project benchmarking sorting algorithm performance across variable dataset sizes. Measures and visualizes runtime complexity using matplotlib, translating raw performance d…
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">matplotlib</span>
+          <span class="tag">Algorithms</span>
+          <span class="tag">Data Viz</span>
+        </div>
+        <div class="project-impact">
+          💡 Demonstrates both analytical rigor and the ability to communicate technical findings clearly to a non-engineering audience.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">06 / AUTOMATION UTILITY</div>
+        <h3 class="project-title">Annotation Cleanup Tool</h3>
+        <p class="project-desc">
+          A Python data-cleaning utility built to ingest raw annotation CSV files, deduplicate entries, surface label conflicts, and export structured, pipeline-ready datasets. Reduced manual review t…
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">CSV Processing</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Automation</span>
+        </div>
+        <div class="project-impact">
+          💡 ~40% reduction in manual processing time — a measurable, shipped improvement to a real data workflow.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Career</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-meta">
+          <div class="tl-date">Mar 2022 – Jan 2023</div>
+          <div class="tl-company">Alignerr</div>
+          <div class="tl-loc">Remote</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-role">AI Content Evaluator</div>
+          <ul class="tl-bullets">
+            <li>Evaluated 500+ AI-generated responses daily for logical consistency, factual accuracy, and guideline compliance — directly informing model retraining cycles.</li>
+            <li>Performed systematic pairwise comparisons of model outputs, documenting reasoning in structured feedback forms used by the QA team.</li>
+            <li>Maintained annotation accuracy above team average while handling high-volume daily queues independently across a 10-month engagement.</li>
+            <li>Used Python scripts to automate repetitive data organization tasks, saving ~3–4 hours of manual processing per week.</li>
+            <li>Flagged culturally inappropriate and guideline-violating outputs with detailed written justification, contributing to cleaner training pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-meta">
+          <div class="tl-date">Ongoing</div>
+          <div class="tl-company">Independent</div>
+          <div class="tl-loc">Remote</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-role">Freelance Developer &amp; Builder</div>
+          <ul class="tl-bullets">
+            <li>Designed and shipped SkinSync AI, King V Assistant, and Church Community Game — three distinct products across AI, productivity, and community domains.</li>
+            <li>Independently scoped, built, documented, and iterated on each project without external oversight or deadlines.</li>
+            <li>Maintained thorough technical documentation and READMEs across all personal projects, reflecting production-ready habits.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education &amp; Certifications</h2>
+    <div class="edu-card" style="margin-bottom:2rem;">
+      <div class="edu-badge">🎓</div>
+      <div class="edu-body">
+        <div class="edu-degree">Bachelor of Science in Computer Science</div>
+        <div class="edu-school">California State University, Long Beach</div>
+        <div class="edu-meta">Long Beach, CA &nbsp;·&nbsp; Graduated 2021</div>
+        <div class="course-tags">
+          <span class="course-tag">Data Structures &amp; Algorithms</span>
+          <span class="course-tag">Machine Learning</span>
+          <span class="course-tag">Software Engineering</span>
+          <span class="course-tag">Database Systems</span>
+          <span class="course-tag">Computer Networks</span>
+          <span class="course-tag">Operating Systems</span>
+          <span class="course-tag">System Design</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; margin-top:1rem;">
+      <div class="info-row">
+        <div class="info-icon">📜</div>
+        <div class="info-content">
+          <div class="info-label">Certification</div>
+          <div class="info-value">Prompt Engineering for Developers — DeepLearning.AI</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📜</div>
+        <div class="info-content">
+          <div class="info-label">Certification</div>
+          <div class="info-value">Intro to Machine Learning — Stanford / Coursera</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📜</div>
+        <div class="info-content">
+          <div class="info-label">Certification</div>
+          <div class="info-value">Python for Everybody — U of Michigan / Coursera</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📜</div>
+        <div class="info-content">
+          <div class="info-label">Certification</div>
+          <div class="info-value">Google IT Support Professional Certificate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-box">
+      <h2>Let's Build Something</h2>
+      <p>
+        Open to software engineering roles, freelance projects, and collaboration opportunities.
+        If you're working on something meaningful and need someone who brings both engineering fundamentals
+        and real-world AI experience — reach out.
+      </p>
+      <span class="contact-email">malikthompson566@gmail.com</span>
+      <div class="contact-links">
+        <a href="mailto:malikthompson566@gmail.com" class="btn-primary">Send Email</a>
+        <a href="tel:+13137411967" class="btn-outline">+1 313-741-1967</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="foot-name">Thompson Malik</span>
+  <span>© 2026 · Software Engineer · California, USA</span>
+</footer>
+
+</body>
+</html>
